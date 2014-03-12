@@ -9,8 +9,9 @@ public class Question {
 	private String opt2;
 	private String opt3;
 	private String opt4;
+	private String answer;
 	private String correct_opt;
-	private int weight;
+	private int weight=1; //if negative weight, weight>-1 and <0
 	
 	//getters and setters
 	public int getQid() {
@@ -60,6 +61,12 @@ public class Question {
 	}
 	public void setOpt4(String opt4) {
 		this.opt4 = opt4;
+	}
+	public String getAnswer() {
+		return answer;
+	}
+	public void setAnswer(String answer) {
+		this.answer = answer;
 	}
 	public String getCorrect_opt() {
 		return correct_opt;

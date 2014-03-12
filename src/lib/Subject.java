@@ -26,5 +26,11 @@ public class Subject {
 	public String toString(){
 		return getSubject_name();
 	}
+	
+	//equals method
+	public boolean equals(Object o){
+		Subject so = (Subject)o;
+		return this.subjectID==so.subjectID;
+	}
 
 }

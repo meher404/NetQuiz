@@ -26,5 +26,11 @@ public class Chapter {
 	public String toString(){
 		return getChapter_name();
 	}
+	
+	//equals method
+	public boolean equals(Object o){
+		Chapter co = (Chapter)o;
+		return this.chapID==co.chapID;
+	}
 
 }

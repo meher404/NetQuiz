@@ -17,6 +17,9 @@ public class User {
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
+	public void setPassword(String pwd){
+		password=pwd;
+	}
 	public String getPassword() {
 		return password;
 	}
