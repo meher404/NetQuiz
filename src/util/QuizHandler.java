@@ -405,4 +405,93 @@ public class QuizHandler implements QuizInterface {
 		return result;
 	}
 	
+	public ArrayList<Integer> getQuizes(){
+		try{
+			Class.forName(classname);
+		    connect = DriverManager.getConnection(url,un,pwd);  
+		    st = connect.createStatement();
+			ArrayList<Integer> quizids = new ArrayList<Integer>();
+			
+			ResultSet rs = st.executeQuery("select DISTINCT(quiz_id) from quiz");
+			while(rs.next()){
+				quizids.add(rs.getInt(1));
+			}
+			st.close();
+			return quizids;
+		}
+		catch(Exception e){
+			System.out.println("error in getQuizes");
+			e.printStackTrace();
+		}
+		finally{
+			if(connect!=null){
+				try {
+					connect.close();
+				} catch (Exception e) {
+					System.out.println("Error during connection closing in getQuizes");
+				}
+			}
+		}
+		return null;
+	}
+	
+	public Quiz getQuiz(int quizId){
+		try{
+			Class.forName(classname);
+		    connect = DriverManager.getConnection(url,un,pwd);  
+		    st = connect.createStatement();
+			Quiz quiz = new Quiz();
+			
+			ArrayList<Question> qs = new ArrayList<Question>();
+			
+			ResultSet rs = st.executeQuery("select * from quiz where quiz_id="+quizId+" ;");
+			int qzid = 0,qid=0;
+			while(rs.next()){
+				qzid = rs.getInt(1);
+				qid = rs.getInt(2);
+				Question q = new Question();
+				q.setWeight(rs.getInt(3));
+				ResultSet rs1 = connect.createStatement().executeQuery("select * from question_bank where qid="+qid+" ;");
+				if(rs1.next()){
+					q.setQid(qid);
+					ResultSet rs2 = connect.createStatement().executeQuery("select subject from subjects where subID="+rs1.getInt(3)+" ;");
+					if(rs2.next()){
+						q.setSubject(rs2.getString(1));
+					}
+					rs2 = connect.createStatement().executeQuery("select chapter from chapters where chapID="+rs1.getInt(2)+" ;");
+					if(rs2.next()){
+						q.setChapter(rs2.getString(1));
+					}
+					q.setQuestion(rs1.getString(4));
+					q.setOpt1(rs1.getString(5));
+					q.setOpt2(rs1.getString(6));
+					q.setOpt3(rs1.getString(7));
+					q.setOpt4(rs1.getString(8));
+					q.setCorrect_opt(rs1.getString(9));
+				}
+				qs.add(q);				
+			}
+			quiz.setQuizid(qzid);
+			quiz.setQuestions(qs);
+			
+			
+			st.close();
+			
+			return quiz;
+		}
+		catch(Exception e){
+			System.out.println("error in getQuiz");
+			e.printStackTrace();
+		}
+		finally{
+			if(connect!=null){
+				try {
+					connect.close();
+				} catch (Exception e) {
+					System.out.println("Error during connection closing in getQuiz");
+				}
+			}
+		}
+		return null;
+	}
 }

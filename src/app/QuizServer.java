@@ -17,9 +17,14 @@ public class QuizServer {
 			serverSocket = new ServerSocket(port);
 			while(true){
 				Socket socket = serverSocket.accept();
-				User user = Database.authenticate("shalu1", "msit123");
+				//teacher
+				/*User user = Database.authenticate("shalu1", "msit123");
 				TeacherUIHandler tuh = new TeacherUIHandler(socket, user);
-				tuh.start();
+				tuh.start();*/
+				//student
+				User user = Database.authenticate("adi1", "msit123");
+				StudentUIHandler suh = new StudentUIHandler(socket, user);
+				suh.start();
 			}
 			
 		} catch (Exception e) {

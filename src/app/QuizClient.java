@@ -10,8 +10,7 @@ public class QuizClient {
 		int port = 97;
 		Socket client = null;
 		try {
-			//System.out.println("Connecting to " + serverName + " on port "+ port);
-			//System.out.print("Enter a integer to get the binary string of it: ");
+			
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			client = new Socket(serverName, port);
 			while(true){
@@ -26,6 +25,7 @@ public class QuizClient {
 					 continue;
 				}
 				else if(msg_from_server.equals("EXIT")){
+					System.out.println("Thank You, visit again.");
 					client.close();
 					break;
 				}
