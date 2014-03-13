@@ -1,7 +1,7 @@
 package test;
 import java.util.ArrayList;
 
-import app.TeacherUI;
+import app.TeacherUIHandler;
 import lib.Chapter;
 import lib.Question;
 import lib.Subject;

@@ -332,7 +332,7 @@ public class QuizHandler implements QuizInterface {
 		    connect = DriverManager.getConnection(url,un,pwd);  
 		    st = connect.createStatement();
 		    int quizid=0;
-		    if(quiz.isEmpty()){
+		    if(quiz==null ||(quiz!=null && quiz.isEmpty())){
 		    	st.close();
 		    	return -1;
 		    }
